@@ -9,4 +9,5 @@ public class ObjetoFruta extends ObjetoInventario{
     public String getTipo(){
         return colorFruta;
     }
+
 }
