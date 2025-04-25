@@ -1,4 +1,4 @@
-public class ObjetoInventario {
+public abstract class ObjetoInventario {
     private String objeto;
     private float precio;
     private int stock;

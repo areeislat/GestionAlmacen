@@ -23,12 +23,7 @@ public class Main {
         inventario1.agregarObjeto(verdura1);
         inventario1.agregarObjeto(leche1);
 
-        //¿esto no debería ir en la boleta con la compra????
-        //Bienvenida
-        System.out.println("===Sistema Almacen===");
-        System.out.println("1. Entrar por usuario");
-        System.out.println("2. Realizar compra");
-        System.out.println("3. Salir");
+
         //Validacion Usuario
         sistema1.validarUsuario();
         //Compra
