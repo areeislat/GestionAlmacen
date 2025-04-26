@@ -14,20 +14,19 @@ public class UsuarioSistema {
     }
 
     //Mejorar!!!
-    public void validarUsuario(){
-        //¿if?
+    public boolean validarUsuario(){
         System.out.println("Ingrese usuario:");
         Scanner scanner = new Scanner (System.in);
         String nombreUsuario = scanner.nextLine();
-        for (int i = 0; i < usuarios.size(); i++){
-            if (usuarios.get(i).getNombre().equals(nombreUsuario)){
+        for (Usuario usuario : usuarios){
+            if (usuario.getNombre().equals(nombreUsuario)){
                 System.out.println("Usuario validado.");
-                break;
+                return true;
             }
-            else{
-                System.out.println("Ingrese usuario valido.");
-            }
+        }
+        System.out.println("Usuario no encontrado");
+        return false;
+
     }
 }
     
-}

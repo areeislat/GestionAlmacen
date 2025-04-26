@@ -2,14 +2,14 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //Registro de inventario
         Inventario inventario1 = new Inventario();
-        UsuarioSistema sistema1 = new UsuarioSistema();
 
-        Usuario usuario1 = new Usuario(1, "Areliz", "198291579-9");
-        Usuario usuario2 = new Usuario(2, "Alma", "25960968-2");
+        Boleta boleta1 = new Boleta();
+
+
+        
 
         //Se agregan usuarios al sistema
-        sistema1.agregarUsuario(usuario1);
-        sistema1.agregarUsuario(usuario2);
+
 
         //manzana
         ObjetoFruta fruta1 = new ObjetoFruta("Manzana", "Verde", 590, 5);
@@ -23,9 +23,9 @@ public class Main {
         inventario1.agregarObjeto(verdura1);
         inventario1.agregarObjeto(leche1);
 
-
+        boleta1.elegirOpcion();
         //Validacion Usuario
-        sistema1.validarUsuario();
+        //sistema1.validarUsuario();
         //Compra
         
     }

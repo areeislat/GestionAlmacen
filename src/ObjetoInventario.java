@@ -1,12 +1,12 @@
-public abstract class ObjetoInventario {
+public class ObjetoInventario extends ObjetoStock{
     private String objeto;
     private float precio;
-    private int stock;
+    
 
     public ObjetoInventario(String objeto, float precio, int stock){
+        super(stock);
         this.objeto = objeto;
         this.precio = precio;
-        this.stock = stock;
     }
 
     public String getObjeto(){
@@ -21,14 +21,15 @@ public abstract class ObjetoInventario {
         return precio;
     }
 
-    public int getStock(){
-        return stock;
-    }
-
     public void setPrecio(float precio){
         if(precio < 0){
             this.precio = precio;
         }
         else{System.out.println("El precio debe ser mayor a cero.");}
+    }
+
+    @Override
+    public String toString() {
+        return "Fruta: " + objeto + ", Precio: $" + precio;
     }
 }

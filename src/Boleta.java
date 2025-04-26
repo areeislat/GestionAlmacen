@@ -8,28 +8,18 @@ public class Boleta implements IvaBoleta {
         compra = new ArrayList<>();
     }
 
-    //Esto esta bien o deberia llamar al objeto inventario?
-    //pero no es abstracto
-    public void agregarCompraFruta(ObjetoFruta fruta){
-        compra.add(fruta);
+    public ArrayList<ObjetoInventario> getCompra() {
+        return compra;
     }
 
-    public void agregarCompraVerdura(ObjetoVerdura verdura){
-        compra.add(verdura);
+    public void realizarCompra(ObjetoFruta fruta, ObjetoVerdura verdura, ObjetoLacteo lacteo){
+
+        System.out.println("¿Qué desea comprar? ");
+        System.out.println(fruta.getObjeto() + " - Precio: $" + fruta.getPrecio());
+        System.out.println(verdura.getObjeto() + " - Precio: $" + verdura.getPrecio());
+        System.out.println(lacteo.getObjeto() + " - Precio: $" + lacteo.getPrecio());
+        System.out.println("Escriba (manzana, zanahoria o leche)");
     }
-
-    public void agregarCompraLacteo(ObjetoLacteo lacteo){
-        compra.add(lacteo);
-    }
-
-    //Esto va despues poh
-    @Override
-    public void calcularIVA() {
-        System.out.println("Calculando iva...");
-    }
-
-
-
 
 
     // No lo repito
@@ -47,26 +37,83 @@ public class Boleta implements IvaBoleta {
 
         Scanner scanner = new Scanner (System.in);
         String decision = "";
+
+        UsuarioSistema sistema1 = new UsuarioSistema();
+        Usuario usuario1 = new Usuario(1, "Areliz", "198291579-9");
+        Usuario usuario2 = new Usuario(2, "Alma", "25960968-2");
+
+        ObjetoFruta fruta1 = new ObjetoFruta("Manzana", "Verde", 590, 5);
+        ObjetoVerdura verdura1 = new ObjetoVerdura("Zanahoria", 1.2, 990, 3);
+        ObjetoLacteo leche1 = new ObjetoLacteo("Leche", "Almendras", 2590, 7);
+
+
+        sistema1.agregarUsuario(usuario1);
+        sistema1.agregarUsuario(usuario2);
+
+        Boleta compra1 = new Boleta();
+        double totalSinIVA = 0.0;
+
+        mostrarMenu();
         
         while (!decision.equals("3")) {
-            mostrarMenu();
-            String desicion = scanner.nextLine();
+            
+            decision = scanner.nextLine();
+
             switch (decision) {
                 case "1":
-                //como lo agrego sin que me de error?
-                    //validarUsuario();
+                    sistema1.validarUsuario();
+                    mostrarMenu();
                     break;
                 case "2":
                     //Compra
+                    realizarCompra(fruta1,verdura1,leche1);
+                    break;
+                case "manzana":
+                    compra.add(fruta1);
+                    System.out.println("Se agregó manzana a su carrito");
+                    mostrarMenu();
+                    break;
+                case "zanahoria":
+                    compra.add(verdura1);
+                    System.out.println("Se agregó zanahoria a su carrito");
+                    mostrarMenu();
+                    break;
+                case "leche":
+                    compra.add(leche1);
+                    System.out.println("Se agregó leche a su carrito");
+                    mostrarMenu();
                     break;
                 case "3":
-                    // Calcular iva
+                    System.out.println("Imprimiento boleta...");
+                    System.out.println("=====================");
+                    for (ObjetoInventario item : getCompra()) {
+                        System.out.println(item);
+                        totalSinIVA += item.getPrecio();
+                    }
+                    System.out.println("=====================");
+                    
+                    System.out.println("Su total sin iva compra es: " + totalSinIVA);
                     calcularIVA();
-                    System.out.println("Su total de la compra es: ");
+                    double iva = totalSinIVA * 0.19;
+                    double totalCompra = totalSinIVA + iva;
+                    System.out.println("Su total de la compra es: " + totalCompra);
                     break;
                 default:
-                    
+                    System.out.println("Elija una opcion válida");
+                    System.out.println("1,2,3 o manzana, zanahoria, verdura");
+                    mostrarMenu();
+        
+            }
         }
     }
 
+    //Esto va despues poh
+    @Override
+    public void calcularIVA() {
+        System.out.println("Calculando iva...");
+    }
+
+
+
 }
+
