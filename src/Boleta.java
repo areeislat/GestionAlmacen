@@ -3,9 +3,12 @@ import java.util.Scanner;
 
 public class Boleta implements IvaBoleta {
     private ArrayList<ObjetoInventario> compra;
+    private double totalSinIVA;
 
     public Boleta(){
         compra = new ArrayList<>();
+        totalSinIVA = 0.0;
+        
     }
 
     public ArrayList<ObjetoInventario> getCompra() {
@@ -51,7 +54,6 @@ public class Boleta implements IvaBoleta {
         sistema1.agregarUsuario(usuario2);
 
         Boleta compra1 = new Boleta();
-        double totalSinIVA = 0.0;
 
         mostrarMenu();
         
@@ -94,9 +96,6 @@ public class Boleta implements IvaBoleta {
                     
                     System.out.println("Su total sin iva compra es: " + totalSinIVA);
                     calcularIVA();
-                    double iva = totalSinIVA * 0.19;
-                    double totalCompra = totalSinIVA + iva;
-                    System.out.println("Su total de la compra es: " + totalCompra);
                     break;
                 default:
                     System.out.println("Elija una opcion válida");
@@ -110,7 +109,10 @@ public class Boleta implements IvaBoleta {
     //Esto va despues poh
     @Override
     public void calcularIVA() {
-        System.out.println("Calculando iva...");
+        System.out.println("Calculando iva y total...");
+        double valorIVA = totalSinIVA * IvaBoleta.iva;
+        double totalCompra = totalSinIVA + valorIVA;
+        System.out.println("Su total con iva es: $" + totalCompra);
     }
 
 
