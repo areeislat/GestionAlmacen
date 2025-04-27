@@ -43,7 +43,6 @@ public class Boleta implements IvaBoleta {
         System.out.println("$" + calculo);
 
         calcularIVA(calculo);
-
     }
 
     @Override
