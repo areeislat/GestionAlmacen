@@ -8,15 +8,14 @@ public class UsuarioSistema {
         usuarios = new ArrayList<>();
     }
 
-    public void agregarUsuario(Usuario usuario){
+    public void agregarUsuario(int id, String nombre, String rut){
+        Usuario usuario = new Usuario(id, nombre, rut);
         usuarios.add(usuario);
         System.out.println("Usuario " + usuario.getNombre() + " ha sido agregado al sistema.");
     }
 
-    //Mejorar!!!
-    public boolean validarUsuario(){
+    public boolean validarUsuario(Scanner scanner){
         System.out.println("Ingrese usuario:");
-        Scanner scanner = new Scanner (System.in);
         String nombreUsuario = scanner.nextLine();
         for (Usuario usuario : usuarios){
             if (usuario.getNombre().equals(nombreUsuario)){

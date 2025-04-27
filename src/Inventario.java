@@ -18,7 +18,7 @@ public class Inventario {
     public void mostrarInventario(){
         System.out.println("------Mostrando inventario-----");
         for(int i = 0; i < objetos.size(); i++){
-            System.out.println(i + ": " + objetos.get(i).getObjeto());
+            System.out.println(i + ": " + objetos.get(i).getObjeto() + ", cantidad: " + objetos.get(i).getStock());
         }
     }
 

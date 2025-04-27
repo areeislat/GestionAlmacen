@@ -1,13 +1,10 @@
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Boleta implements IvaBoleta {
     private ArrayList<ObjetoInventario> compra;
-    private double totalSinIVA;
 
     public Boleta(){
         compra = new ArrayList<>();
-        totalSinIVA = 0.0;
         
     }
 
@@ -21,98 +18,41 @@ public class Boleta implements IvaBoleta {
         System.out.println(fruta.getObjeto() + " - Precio: $" + fruta.getPrecio());
         System.out.println(verdura.getObjeto() + " - Precio: $" + verdura.getPrecio());
         System.out.println(lacteo.getObjeto() + " - Precio: $" + lacteo.getPrecio());
-        System.out.println("Escriba (manzana, zanahoria o leche)");
     }
 
 
-    // No lo repito
-    public void mostrarMenu() {
-        System.out.println("===Sistema Almacen===");
-        System.out.println("1. Entrar por usuario");
-        System.out.println("2. Realizar compra");
-        System.out.println("3. Salir");
-        System.out.println("=====================");
-       }
+    // Obtengo mi informacion de mi carrito de compra
+    //Obtener el precio y cantidad
+        //recorrer cada objeto de mi carrito de compra
+        //obtener el precio y cantidad de cada uno de esos objeto y hacer el calculo
+        //guardar esa variable y sumar el siguiente calculo del recorrido del objeto 
+        //Calculo del subtotal
+    //Calculo del iva
+    //Calculo total
+    //Mostrar la boleta con los datos
 
-    // Scanner en el while / switch?
-    // Aquí implemento el calculo del iva
-    public void elegirOpcion() {
-
-        Scanner scanner = new Scanner (System.in);
-        String decision = "";
-
-        UsuarioSistema sistema1 = new UsuarioSistema();
-        Usuario usuario1 = new Usuario(1, "Areliz", "198291579-9");
-        Usuario usuario2 = new Usuario(2, "Alma", "25960968-2");
-
-        ObjetoFruta fruta1 = new ObjetoFruta("Manzana", "Verde", 590, 5);
-        ObjetoVerdura verdura1 = new ObjetoVerdura("Zanahoria", 1.2, 990, 3);
-        ObjetoLacteo leche1 = new ObjetoLacteo("Leche", "Almendras", 2590, 7);
-
-
-        sistema1.agregarUsuario(usuario1);
-        sistema1.agregarUsuario(usuario2);
-
-        Boleta compra1 = new Boleta();
-
-        mostrarMenu();
-        
-        while (!decision.equals("3")) {
-            
-            decision = scanner.nextLine();
-
-            switch (decision) {
-                case "1":
-                    sistema1.validarUsuario();
-                    mostrarMenu();
-                    break;
-                case "2":
-                    //Compra
-                    realizarCompra(fruta1,verdura1,leche1);
-                    break;
-                case "manzana":
-                    compra.add(fruta1);
-                    System.out.println("Se agregó manzana a su carrito");
-                    mostrarMenu();
-                    break;
-                case "zanahoria":
-                    compra.add(verdura1);
-                    System.out.println("Se agregó zanahoria a su carrito");
-                    mostrarMenu();
-                    break;
-                case "leche":
-                    compra.add(leche1);
-                    System.out.println("Se agregó leche a su carrito");
-                    mostrarMenu();
-                    break;
-                case "3":
-                    System.out.println("Imprimiento boleta...");
-                    System.out.println("=====================");
-                    for (ObjetoInventario item : getCompra()) {
-                        System.out.println(item);
-                        totalSinIVA += item.getPrecio();
-                    }
-                    System.out.println("=====================");
-                    
-                    System.out.println("Su total sin iva compra es: " + totalSinIVA);
-                    calcularIVA();
-                    break;
-                default:
-                    System.out.println("Elija una opcion válida");
-                    System.out.println("1,2,3 o manzana, zanahoria, verdura");
-                    mostrarMenu();
-        
-            }
+    public void calculoBoleta(Inventario carritoCompra){
+        carritoCompra. mostrarInventario();
+        //iterando por cada objeto del carrito de compra
+        float calculo = 0;
+        for (ObjetoInventario objeto : carritoCompra.getObjeto()) {
+            calculo += (objeto.getPrecio() * (float) objeto.getStock());
         }
+
+        System.out.println("Subtotal compra: ");
+        System.out.println("$" + calculo);
+
+        calcularIVA(calculo);
+
     }
 
-    //Esto va despues poh
     @Override
-    public void calcularIVA() {
+    public void calcularIVA(float calculo) {
         System.out.println("Calculando iva y total...");
-        double valorIVA = totalSinIVA * IvaBoleta.iva;
-        double totalCompra = totalSinIVA + valorIVA;
-        System.out.println("Su total con iva es: $" + totalCompra);
+        double valorIVA = calculo * IvaBoleta.iva;
+        System.out.println("Su IVA es: $" + valorIVA);
+        double totalCompra = calculo + valorIVA;
+        System.out.println("Su total: $" + totalCompra);
     }
 
 
